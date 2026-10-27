@@ -1,0 +1,17 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(?:data|src)/ - [F,L,NC]
+</IfModule>
+
+<FilesMatch "^(?:config\.php|worker\.php|README\.md)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule !mod_authz_core.c>
+    <FilesMatch "^(?:config\.php|worker\.php|README\.md)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
